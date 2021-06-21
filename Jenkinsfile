@@ -5,7 +5,7 @@ pipeline {
         stage('Remote SSH') { 
             steps {
                 echo "Build"
-                sshagent(credentials: ['ansible-master-private-key']) {
+                sshagent(credentials: ['bvg_id']) {
                     sh "ssh $sshArgs vantonini@192.168.0.102"
                 }
             }
