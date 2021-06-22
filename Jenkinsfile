@@ -1,37 +1,26 @@
 def sshArgs = "-o StrictHostKeyChecking=no"
 def remoteUser = 'vantonini'
 def remoteAddress = '192.168.0.102'
-def remotePath = '/home/vantonini/cpfiles/'
-def localFiles = 'README.md file1.txt'
-
-def remote = [:]
-remote.name = 'vantonini'
-remote.host = '192.168.0.102'
-remote.user = 'vantonini'
-remote.agent = true
-//remote.password = 'password'
-remote.allowAnyHosts = true
-remote.fileTransfer = 'SCP'
+def remotePath = '/home/vantonini'
 
 pipeline {
     agent any 
     stages {
         stage('Remote SSH - SCP') { 
             steps {
-                echo "Build"
+                echo "Copying files"
                 sshagent(credentials: ['bvg_id']) {
+                    sh "ssh $sshArgs $remoteUser@$remoteAddress << EOF
+                        if [ -d $remotePath ]; then
+                            echo 'Path already exists'
+                        fi
+                    EOF
+                    "
                     // sh "ssh $sshArgs vantonini@192.168.0.102"
-                    //sh "scp -r $WORKSPACE/README.md $remoteUser@$remoteAddress:$remotePath"
-                    sh "scp -r $localFiles $remoteUser@$remoteAddress:$remotePath"
+                    // sh "scp -r $WORKSPACE/README.md $remoteUser@$remoteAddress:$remotePath"
                 }
             }
         }
-//         stage('Remote SSH - sshPut') {
-//             steps {
-//                 //writeFile file: 'README.md', text: 'ls -lrt'
-//                 sshPut remote: remote, from: 'README.md', into: '/home/vantonini/sshPut/'
-//             }
-//         }
         stage('Deploy') { 
             steps {
                 echo "Deploy"
