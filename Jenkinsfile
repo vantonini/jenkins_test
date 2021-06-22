@@ -21,7 +21,7 @@ pipeline {
                 sshagent(credentials: ['bvg_id']) {
                     // sh "ssh $sshArgs vantonini@192.168.0.102"
                     //sh "scp -r $WORKSPACE/README.md $remoteUser@$remoteAddress:$remotePath"
-                    sh "scp -r !(file1.txt) $remoteUser@$remoteAddress:$remotePath"
+                    sh "scp -r (README.md file1.txt) $remoteUser@$remoteAddress:$remotePath"
                 }
             }
         }
