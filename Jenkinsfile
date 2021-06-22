@@ -2,6 +2,7 @@ def sshArgs = "-o StrictHostKeyChecking=no"
 def remoteUser = 'vantonini'
 def remoteAddress = '192.168.0.102'
 def remotePath = '/home/vantonini/cpfiles/'
+def localFiles = 'README.md file1.txt'
 
 def remote = [:]
 remote.name = 'vantonini'
@@ -21,7 +22,7 @@ pipeline {
                 sshagent(credentials: ['bvg_id']) {
                     // sh "ssh $sshArgs vantonini@192.168.0.102"
                     //sh "scp -r $WORKSPACE/README.md $remoteUser@$remoteAddress:$remotePath"
-                    sh "scp -r (README.md file1.txt) $remoteUser@$remoteAddress:$remotePath"
+                    sh "scp -r $localFiles $remoteUser@$remoteAddress:$remotePath"
                 }
             }
         }
