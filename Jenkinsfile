@@ -15,8 +15,8 @@ pipeline {
                             if [ -d $remotePath ]; then
                                 echo 'Path already exists'
                             fi
-                        ENDSSH
-                    '''
+                            ip address
+                        ENDSSH'''
                     // sh "ssh $sshArgs vantonini@192.168.0.102"
                     // sh "scp -r $WORKSPACE/README.md $remoteUser@$remoteAddress:$remotePath"
                 }
