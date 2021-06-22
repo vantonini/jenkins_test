@@ -1,31 +1,32 @@
 def sshArgs = "-o StrictHostKeyChecking=no"
 def remoteUser = 'vantonini'
 def remoteAddress = '192.168.0.102'
-def remotePath = '/home/vantonini/'
+def remotePath = '/home/vantonini/cpfiles/'
 def remotePathBackup = '/tmp/nagios_backup/'
+def filesToCopy = 'README.md file1.txt'
 
 pipeline {
     agent any 
     stages {
-        stage('Remote SSH - SCP') { 
+        stage('Copying file over ') { 
             steps {
-                echo "Copying files"
                 sshagent(credentials: ['bvg_id']) {
-                    sh """
-                        ssh -t $sshArgs $remoteUser@$remoteAddress '''
-                        if [ -d $remotePath ]; then
-                            mkdir -p $remotePathBackup; mv ${remotePath}* $remotePathBackup
-                        fi
-                        ls $remotePath
-                    '''
-                    """
-                    // sh "ssh $sshArgs vantonini@192.168.0.102"
-                    // sh "scp -r $WORKSPACE/README.md $remoteUser@$remoteAddress:$remotePath"
+                    sh "scp -r $filesToCopy $remoteUser@$remoteAddress:$remotePathBackup"
+                    // check nagios files
+                    
                 }
             }
         }
         stage('Deploy') { 
             steps {
+                sshagent(credentials: ['bvg_id']) {
+                    sh """
+                        ssh -t $sshArgs $remoteUser@$remoteAddress '''
+                        rm -rf $remotePath*
+                        mv ${remotePathBackup}* $remotePath
+                        '''
+                    """
+                }
                 echo "Deploy"
             }
         }
