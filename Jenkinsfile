@@ -10,11 +10,11 @@ pipeline {
             steps {
                 echo "Copying files"
                 sshagent(credentials: ['bvg_id']) {
-                    sh "ssh $sshArgs $remoteUser@$remoteAddress << EOF
+                    sh "ssh $sshArgs $remoteUser@$remoteAddress << 'EOF
                         if [ -d $remotePath ]; then
                             echo 'Path already exists'
                         fi
-                    EOF
+                    EOF'
                     "
                     // sh "ssh $sshArgs vantonini@192.168.0.102"
                     // sh "scp -r $WORKSPACE/README.md $remoteUser@$remoteAddress:$remotePath"
