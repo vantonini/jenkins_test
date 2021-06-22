@@ -1,12 +1,13 @@
 def sshArgs = "-o StrictHostKeyChecking=no"
 def remoteUser = 'vantonini'
 def remoteAddress = '192.168.0.102'
-def remotePath = '/home/vantonini'
+def remotePath = '/home/vantonini/cpfiles/'
 
 def remote = [:]
 remote.name = 'vantonini'
 remote.host = '192.168.0.102'
 remote.user = 'vantonini'
+remote.agent = true
 //remote.password = 'password'
 remote.allowAnyHosts = true
 
