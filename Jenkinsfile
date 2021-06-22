@@ -23,7 +23,8 @@ pipeline {
                     sh """
                         ssh -t $sshArgs $remoteUser@$remoteAddress '''
                         rm -rf $remotePath*
-                        mv ${remotePathBackup}* $remotePath
+                        cp -p ${remotePathBackup}* $remotePath
+                        rm -rf ${remotePathBackup}*
                         '''
                     """
                 }
