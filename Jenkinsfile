@@ -6,9 +6,8 @@ pipeline {
             steps {
                 echo "Build"
                 sshagent(credentials: ['bvg_id']) {
-                    sh "ssh $sshArgs vantonini@192.168.0.102"
-                    sh "ip address"
-
+                    // sh "ssh $sshArgs vantonini@192.168.0.102"
+                    sh "ll"
                 }
             }
         }
