@@ -10,6 +10,7 @@ remote.user = 'vantonini'
 remote.agent = true
 //remote.password = 'password'
 remote.allowAnyHosts = true
+remote.fileTransfer = 'SCP'
 
 pipeline {
     agent any 
