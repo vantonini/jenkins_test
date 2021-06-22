@@ -7,7 +7,7 @@ pipeline {
                 echo "Build"
                 sshagent(credentials: ['bvg_id']) {
                     // sh "ssh $sshArgs vantonini@192.168.0.102"
-                    sh "scp $WORKSPACE\README.md vantonini@192.168.0.102:/home/vantonini"
+                    sh "scp $WORKSPACE/README.md vantonini@192.168.0.102:/home/vantonini"
                 }
             }
         }
