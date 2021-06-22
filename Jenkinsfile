@@ -20,16 +20,17 @@ pipeline {
                 echo "Build"
                 sshagent(credentials: ['bvg_id']) {
                     // sh "ssh $sshArgs vantonini@192.168.0.102"
-                    sh "scp -r $WORKSPACE/README.md $remoteUser@$remoteAddress:$remotePath"
+                    //sh "scp -r $WORKSPACE/README.md $remoteUser@$remoteAddress:$remotePath"
+                    sh "scp -r !(file1.txt file3.txt) $remoteUser@$remoteAddress:$remotePath"
                 }
             }
         }
-        stage('Remote SSH - sshPut') {
-            steps {
-                //writeFile file: 'README.md', text: 'ls -lrt'
-                sshPut remote: remote, from: 'README.md', into: '/home/vantonini/sshPut/'
-            }
-        }
+//         stage('Remote SSH - sshPut') {
+//             steps {
+//                 //writeFile file: 'README.md', text: 'ls -lrt'
+//                 sshPut remote: remote, from: 'README.md', into: '/home/vantonini/sshPut/'
+//             }
+//         }
         stage('Deploy') { 
             steps {
                 echo "Deploy"
