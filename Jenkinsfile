@@ -23,8 +23,10 @@ pipeline {
             }
         }
         stage('Remote SSH - sshPut') {
-          //writeFile file: 'README.md', text: 'ls -lrt'
-          sshPut remote: remote, from: 'README.md', into: '/home/vantonini/sshPut'
+            step {
+                //writeFile file: 'README.md', text: 'ls -lrt'
+                sshPut remote: remote, from: 'README.md', into: '/home/vantonini/sshPut'
+            }
         }
         stage('Deploy') { 
             steps {
