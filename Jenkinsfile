@@ -1,7 +1,8 @@
 def sshArgs = "-o StrictHostKeyChecking=no"
 def remoteUser = 'vantonini'
 def remoteAddress = '192.168.0.102'
-def remotePath = '/home/vantonini'
+def remotePath = '/home/vantonini/'
+def remotePathBackup = '/tmp/nagios_backup/'
 
 pipeline {
     agent any 
@@ -13,8 +14,9 @@ pipeline {
                     sh """
                         ssh -t $sshArgs $remoteUser@$remoteAddress '''
                         if [ -d $remotePath ]; then
-                            echo \"Path already exists\"
+                            mkdir -p $remotePathBackup; mv ${remotePath}* $remotePathBackup
                         fi
+                        echo "$(ls $remotePath)"
                     '''
                     """
                     // sh "ssh $sshArgs vantonini@192.168.0.102"
