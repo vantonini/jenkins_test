@@ -11,7 +11,7 @@ pipeline {
                 echo "Copying files"
                 sshagent(credentials: ['bvg_id']) {
                     sh '''
-                        ssh $sshArgs $remoteUser@$remoteAddress 'bash -s << 'ENDSSH'
+                        ssh -t $sshArgs $remoteUser@$remoteAddress '/usr/bin/bash -s << 'ENDSSH'
                         if [ -d $remotePath ]; then
                             echo \"Path already exists\"
                         fi
