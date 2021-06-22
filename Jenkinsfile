@@ -16,7 +16,7 @@ pipeline {
                         if [ -d $remotePath ]; then
                             mkdir -p $remotePathBackup; mv ${remotePath}* $remotePathBackup
                         fi
-                        echo "$(ls $remotePath)"
+                        ls $remotePath
                     '''
                     """
                     // sh "ssh $sshArgs vantonini@192.168.0.102"
