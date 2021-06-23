@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Copying file over ') { 
                 steps {
-                    sshagent(credentials: ['bvg_id']) {
+                    sshagent(credentials: ['vantonini-github']) {
                         script {
                             try {
                                 sh "scp -rp $filesToCopy $remoteUser@$remoteAddress:$remotePathBackup"
@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Deploy') { 
             steps {
-                sshagent(credentials: ['bvg_id']) {
+                sshagent(credentials: ['vantonini-github']) {
                     sh """
                         ssh -t $sshArgs $remoteUser@$remoteAddress '''
                         rm -rf $remotePath*
