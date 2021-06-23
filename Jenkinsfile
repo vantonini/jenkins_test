@@ -30,4 +30,15 @@ pipeline {
             }
         }
     }
+    post {
+    
+        success {
+            echo 'Success'
+            // slackSend(channel: "#dev-ops", tokenCredentialId: "slack-ptr", message: 'Nagios service restarted successfully', color: "good")
+        }
+        failure {           
+            echo 'Failure'
+            // slackSend(channel: "#dev-ops", tokenCredentialId: "slack-ptr", message: "Nagios build didn't work. Please check for errors.", color: "danger")
+        }
+    }
 }
