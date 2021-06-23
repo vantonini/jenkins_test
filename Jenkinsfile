@@ -1,6 +1,6 @@
 def sshArgs = "-o StrictHostKeyChecking=no"
 def remoteUser = 'vantonini'
-def remoteAddress = '192.168.0.103'
+def remoteAddress = '192.168.0.102'
 def remotePath = '/home/vantonini/cpfiles/'
 def remotePathBackup = '/tmp/nagios_backup/'
 def filesToCopy = 'README.md file1.txt'
@@ -34,11 +34,11 @@ pipeline {
     
         success {
             echo 'Success'
-            // slackSend(channel: "#dev-ops", tokenCredentialId: "slack-ptr", message: 'Nagios service restarted successfully', color: "good")
+            
         }
         failure {           
             echo 'Failure'
-            // slackSend(channel: "#dev-ops", tokenCredentialId: "slack-ptr", message: "Nagios build didn't work. Please check for errors.", color: "danger")
+
         }
     }
 }
