@@ -1,6 +1,6 @@
 def sshArgs = "-o StrictHostKeyChecking=no"
 def remoteUser = 'vantonini'
-def remoteAddress = '192.168.0.102'
+def remoteAddress = '192.168.0.103'
 def remotePath = '/home/vantonini/cpfiles/'
 def remotePathBackup = '/tmp/nagios_backup/'
 def filesToCopy = 'README.md file1.txt'
