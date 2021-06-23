@@ -16,7 +16,7 @@ pipeline {
                                 sh "scp -rp $filesToCopy $remoteUser@$remoteAddress:$remotePathBackup"
                             }
                             catch (err) {
-                               echo err
+                               echo err.toString()
                             }
                         }
                     }
