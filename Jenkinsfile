@@ -10,11 +10,17 @@ pipeline {
     stages {
         stage('Copying file over ') { 
             steps {
-                sshagent(credentials: ['bvg_id']) {
+                try {
+                    sshagent(credentials: ['bvg_id']) {
                     sh "scp -rp $filesToCopy $remoteUser@$remoteAddress:$remotePathBackup"
                     // check nagios files
                     
                 }
+                catch (err) {
+                    echo err
+                }
+            }
+                
             }
         }
         stage('Deploy') { 
