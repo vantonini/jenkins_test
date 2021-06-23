@@ -14,13 +14,11 @@ pipeline {
                     sshagent(credentials: ['bvg_id']) {
                     sh "scp -rp $filesToCopy $remoteUser@$remoteAddress:$remotePathBackup"
                     // check nagios files
-                    
+                    }
                 }
                 catch (err) {
                     echo err
                 }
-            }
-                
             }
         }
         stage('Deploy') { 
