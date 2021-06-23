@@ -11,14 +11,7 @@ pipeline {
         stage('Copying file over ') { 
                 steps {
                     sshagent(credentials: ['vantonini-github']) {
-                        script {
-                            try {
-                                sh "scp -rp $filesToCopy $remoteUser@$remoteAddress:$remotePathBackup"
-                            }
-                            catch (err) {
-                               echo err.toString()
-                            }
-                        }
+                        sh "scp -rp $filesToCopy $remoteUser@$remoteAddress:$remotePathBackup"
                     }
                 }
         }
