@@ -14,7 +14,7 @@ pipeline {
                 sshagent(credentials: ['vantonini-github']) {
                     sh """
                         ssh -t $sshArgs $remoteUser@$remoteAddress '''
-                        [ ! -d ${remotePathTemp} ] && mkdir ${remotePathTemp}
+                        [ ! -d ${remotePathTemp} ] && mkdir ${remotePathTemp};
                         [ ! -d ${remotePathBackup} ] && mkdir ${remotePathBackup}
                         '''
                     """   
