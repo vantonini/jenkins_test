@@ -13,10 +13,7 @@ pipeline {
             steps {
                 sshagent(credentials: ['vantonini-github']) {
                     sh """
-                        ssh -t $sshArgs $remoteUser@$remoteAddress '''
-                        [ ! -d ${remotePathTemp} ] && mkdir ${remotePathTemp};
-                        [ ! -d ${remotePathBackup} ] && mkdir ${remotePathBackup}
-                        '''
+                        ssh -t $sshArgs $remoteUser@$remoteAddress [ ! -d ${remotePathTemp} ] && mkdir ${remotePathTemp}; [ ! -d ${remotePathBackup} ] && mkdir ${remotePathBackup}
                     """   
                         sh "scp -rp $filesToCopy $remoteUser@$remoteAddress:$remotePathBackup"
                     }
