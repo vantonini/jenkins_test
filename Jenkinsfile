@@ -3,6 +3,7 @@ def remoteUser = 'vantonini'
 def remoteAddress = '192.168.2.102'
 def remotePath = '/home/vantonini/cpfiles/'
 def remotePathBackup = '/tmp/nagios_backup/'
+def remotePathTemp = '/tmp/nagios_path_temp/'
 def filesToCopy = 'README.md file1.txt'
 
 pipeline {
