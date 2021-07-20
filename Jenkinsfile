@@ -1,6 +1,6 @@
 def sshArgs = "-o StrictHostKeyChecking=no"
 def remoteUser = 'vantonini'
-def remoteAddress = '192.168.0.102'
+def remoteAddress = '192.168.2.102'
 def remotePath = '/home/vantonini/cpfiles/'
 def remotePathBackup = '/tmp/nagios_backup/'
 def filesToCopy = 'README.md file1.txt'
@@ -11,6 +11,12 @@ pipeline {
         stage('Copying file over ') { 
                 steps {
                     sshagent(credentials: ['vantonini-github']) {
+                        sh """
+                        ssh -t $sshArgs $remoteUser@$remoteAddress '''
+                            [ ! -d ${remotePathTemp} ] && mkdir ${remotePathTemp}
+                            [ ! -d ${remotePathBackup} ] && mkdir ${remotePathBackup}
+                        '''
+                    """   
                         sh "scp -rp $filesToCopy $remoteUser@$remoteAddress:$remotePathBackup"
                     }
                 }
